@@ -1,0 +1,7 @@
+# Ignore IntelliJ project files
+# idk if this'll make things weird when we pull each other's code, if it does we can remove these rules
+.idea/*
+*.iml
+
+# output files
+.out/*
