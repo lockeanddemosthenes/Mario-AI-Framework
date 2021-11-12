@@ -1,4 +1,4 @@
-package levelGenerators.AEM;
+package levelGenerators.ChengHuntNagyGenerator;
 
 import java.util.Random;
 
