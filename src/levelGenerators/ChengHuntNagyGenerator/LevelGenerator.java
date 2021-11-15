@@ -305,57 +305,62 @@ public class LevelGenerator implements MarioLevelGenerator {
     @Override
     public String getGeneratedLevel(MarioLevelModel model, MarioTimer timer) {
         model.clearMap();
-
-        odds[ODDS_STRAIGHT] = 20;
-        odds[ODDS_HILL_STRAIGHT] = 10;
-        odds[ODDS_TUBES] = 2 + 1 * difficulty;
-        odds[ODDS_JUMP] = 2 * difficulty;
-        odds[ODDS_CANNONS] = -10 + 5 * difficulty;
-
-        if (type > 0) {
-            odds[ODDS_HILL_STRAIGHT] = 0;
-        }
-
-        for (int i = 0; i < odds.length; i++) {
-            if (odds[i] < 0)
-                odds[i] = 0;
-            totalOdds += odds[i];
-            odds[i] = totalOdds - odds[i];
-        }
-
-        int length = 0;
-        length += buildStraight(model, 0, model.getWidth(), true);
-        while (length < model.getWidth()) {
-            length += buildZone(model, length, model.getWidth() - length);
-        }
-
-        int floor = model.getHeight() - 1 - random.nextInt(4);
-
-        for (int x = length; x < model.getWidth(); x++) {
-            for (int y = 0; y < model.getHeight(); y++) {
-                if (y >= floor) {
-                    model.setBlock(x, y, MarioLevelModel.GROUND);
-                }
-            }
-        }
-
-        if (type > 0) {
-            int ceiling = 0;
-            int run = 0;
-            for (int x = 0; x < model.getWidth(); x++) {
-                if (run-- <= 0 && x > 4) {
-                    ceiling = random.nextInt(4);
-                    run = random.nextInt(4) + 4;
-                }
-                for (int y = 0; y < model.getHeight(); y++) {
-                    if ((x > 4 && y <= ceiling) || x < 1) {
-                        model.setBlock(x, y, MarioLevelModel.NORMAL_BRICK);
-                    }
-                }
-            }
-        }
         return model.getMap();
     }
+//    @Override
+//    public String getGeneratedLevel(MarioLevelModel model, MarioTimer timer) {
+//        model.clearMap();
+//
+//        odds[ODDS_STRAIGHT] = 20;
+//        odds[ODDS_HILL_STRAIGHT] = 10;
+//        odds[ODDS_TUBES] = 2 + 1 * difficulty;
+//        odds[ODDS_JUMP] = 2 * difficulty;
+//        odds[ODDS_CANNONS] = -10 + 5 * difficulty;
+//
+//        if (type > 0) {
+//            odds[ODDS_HILL_STRAIGHT] = 0;
+//        }
+//
+//        for (int i = 0; i < odds.length; i++) {
+//            if (odds[i] < 0)
+//                odds[i] = 0;
+//            totalOdds += odds[i];
+//            odds[i] = totalOdds - odds[i];
+//        }
+//
+//        int length = 0;
+//        length += buildStraight(model, 0, model.getWidth(), true);
+//        while (length < model.getWidth()) {
+//            length += buildZone(model, length, model.getWidth() - length);
+//        }
+//
+//        int floor = model.getHeight() - 1 - random.nextInt(4);
+//
+//        for (int x = length; x < model.getWidth(); x++) {
+//            for (int y = 0; y < model.getHeight(); y++) {
+//                if (y >= floor) {
+//                    model.setBlock(x, y, MarioLevelModel.GROUND);
+//                }
+//            }
+//        }
+//
+//        if (type > 0) {
+//            int ceiling = 0;
+//            int run = 0;
+//            for (int x = 0; x < model.getWidth(); x++) {
+//                if (run-- <= 0 && x > 4) {
+//                    ceiling = random.nextInt(4);
+//                    run = random.nextInt(4) + 4;
+//                }
+//                for (int y = 0; y < model.getHeight(); y++) {
+//                    if ((x > 4 && y <= ceiling) || x < 1) {
+//                        model.setBlock(x, y, MarioLevelModel.NORMAL_BRICK);
+//                    }
+//                }
+//            }
+//        }
+//        return model.getMap();
+//    }
 
     @Override
     public String getGeneratorName() {

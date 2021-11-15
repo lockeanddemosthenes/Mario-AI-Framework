@@ -4,4 +4,4 @@
 *.iml
 
 # output files
-.out/*
+out/*
