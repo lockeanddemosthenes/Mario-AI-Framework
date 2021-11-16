@@ -1,5 +1,8 @@
 package levelGenerators.ChengHuntNagyGenerator;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Random;
 
 import engine.core.MarioLevelGenerator;
@@ -302,9 +305,38 @@ public class LevelGenerator implements MarioLevelGenerator {
         }
     }
 
+    // Returns an entire level string from a file
+    // Adapted from PlayLevel.java
+    private String getLevelFromFile(String filepath){
+        String content = "";
+        try {
+            content = new String(Files.readAllBytes(Paths.get(filepath)));
+        } catch (IOException e) {
+        }
+        return content;
+    }
+
     @Override
     public String getGeneratedLevel(MarioLevelModel model, MarioTimer timer) {
         model.clearMap();
+
+        // Copy an example level
+        String level = getLevelFromFile("./levels/original/lvl-1.txt");
+
+        //System.out.print(level);
+        model.copyFromString(0,0, 10, 0, 25, 16, level);
+
+        // TODO: Populate this array with several level chunks
+        // As used in GenerateLevel.java, levels are 150 blocks long
+        // and 16 blocks high. So if we want to evenly divide the
+        // level's length, we'd want to choose level chunks that are
+        // 15 blocks wide each (including the flag chunk, but it's
+        // alright if a bit of that block is cut off at the end as
+        // long as the flag isn't cut off)
+        LevelChunk[] states = {};
+
+        MarkovChain markovChain = new MarkovChain(states);
+
         return model.getMap();
     }
 //    @Override

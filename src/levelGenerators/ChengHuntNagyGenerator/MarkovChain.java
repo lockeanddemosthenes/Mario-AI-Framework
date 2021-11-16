@@ -14,5 +14,10 @@ public class MarkovChain {
 
     int numStates;
     int currentState;
-    int steps;
+    int maxSteps = 10; // Arbitrary, can alter this value
+
+    public MarkovChain(LevelChunk[] states){
+        this.states = states;
+        currentState = 0;
+    }
 }
