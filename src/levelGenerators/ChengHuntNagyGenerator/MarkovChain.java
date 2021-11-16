@@ -1,5 +1,6 @@
 package levelGenerators.ChengHuntNagyGenerator;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 
@@ -10,13 +11,13 @@ public class MarkovChain {
 
     // Each state is a level chunk
     // We can just access a state via its index, i.e. State 0 = element at index 0
-    LevelChunk[] states;
+    ArrayList<LevelChunk> states;
 
     int numStates;
     int currentState;
     int maxSteps = 10; // Arbitrary, can alter this value
 
-    public MarkovChain(LevelChunk[] states){
+    public MarkovChain(ArrayList<LevelChunk> states){
         this.states = states;
         currentState = 0;
     }

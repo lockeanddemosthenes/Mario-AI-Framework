@@ -3,7 +3,9 @@ package levelGenerators.ChengHuntNagyGenerator;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
 
 import engine.core.MarioLevelGenerator;
 import engine.core.MarioLevelModel;
@@ -324,6 +326,7 @@ public class LevelGenerator implements MarioLevelGenerator {
         String level = getLevelFromFile("./levels/original/lvl-1.txt");
 
         //System.out.print(level);
+        // This is how we can copy a level chunk into a level
         model.copyFromString(0,0, 10, 0, 25, 16, level);
 
         // TODO: Populate this array with several level chunks
@@ -333,7 +336,7 @@ public class LevelGenerator implements MarioLevelGenerator {
         // 15 blocks wide each (including the flag chunk, but it's
         // alright if a bit of that block is cut off at the end as
         // long as the flag isn't cut off)
-        LevelChunk[] states = {};
+        ArrayList<LevelChunk> states = new ArrayList<LevelChunk>();
 
         MarkovChain markovChain = new MarkovChain(states);
 
