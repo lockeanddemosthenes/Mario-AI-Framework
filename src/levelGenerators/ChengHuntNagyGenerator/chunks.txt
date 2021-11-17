@@ -1,0 +1,16 @@
+./levels/patternWeightCount/lvl-4.txt 107 false
+./levels/patternWeightCount/lvl-11.txt 52 false
+./levels/patternWeightCount/lvl-12.txt 120 false
+./levels/patternWeightCount/lvl-23.txt 69 false
+./levels/patternWeightCount/lvl-27.txt 119 false
+./levels/patternWeightCount/lvl-38.txt 56 false
+./levels/patternWeightCount/lvl-38.txt 96 false
+./levels/patternWeightCount/lvl-49.txt 53 false
+./levels/patternWeightCount/lvl-69.txt 69 false
+./levels/patternWeightCount/lvl-69.txt 127 false
+./levels/ge/lvl-82.txt 40 false
+./levels/patternWeightCount/lvl-16.txt 176 true
+./levels/ge/lvl-65.txt 176 true
+./levels/ge/lvl-51.txt 176 true
+./levels/hopper/lvl-54.txt 176 true
+./levels/hopper/lvl-89.txt 176 true
