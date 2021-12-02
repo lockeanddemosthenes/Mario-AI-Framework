@@ -1,13 +1,19 @@
 package agents.chengHuntNagy;
 
+import agents.chengHuntNagy.Helper;
+import engine.core.MarioForwardModel;
+
 public enum StateMachine {
     Run {
         @Override
         public String getState() {
             return "Run";
         }
-        //TODO
-        public StateMachine nextState() {
+
+        @Override
+        public StateMachine nextState(MarioForwardModel model) {
+            if(Helper.isEnemyNearby(model)){ return Kill; }
+            else if(Helper.isBlockNearby(model)) { return Block; }
             return this;
         }
     },  
@@ -16,9 +22,13 @@ public enum StateMachine {
         public String getState() {
             return "Kill";
         }
-        //TODO
-        public StateMachine nextState() {
-            return this;
+
+        @Override
+        public StateMachine nextState(MarioForwardModel model) {
+            if(Helper.isEnemyNearby(model)){ return this; }
+            else if(Helper.isBlockNearby(model)) { return Block; }
+
+            return Run;
         }
     },
     Block {
@@ -26,11 +36,16 @@ public enum StateMachine {
         public String getState() {
             return "Block";
         }
-        //TODO
-        public StateMachine nextState() {
-            return this;
+
+        @Override
+        public StateMachine nextState(MarioForwardModel model) {
+            if(Helper.isEnemyNearby(model)){ return Kill; }
+            else if(Helper.isBlockNearby(model)) { return this; }
+
+            return Run;
         }
     };
 
     public abstract String getState();
+    public abstract StateMachine nextState(MarioForwardModel model);
 }
