@@ -125,6 +125,11 @@ public class PathFinder {
         int planAhead = 2;
         int stepsPerSearch = 2;
 
+        // TODO write kill state code
+        // check state
+        // move right until enemy x pos within 2 of mario's and jump
+
+
         MarioForwardModel originalModel = model.clone();
         ticksBeforeReplanning--;
         requireReplanning = false;

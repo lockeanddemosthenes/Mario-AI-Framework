@@ -19,7 +19,6 @@ public class Helper {
     public static final float maxMarioSpeed = 10.9090909f;
 
     /**
-     * Credit: robinBaumgarten agent
      * Creates a MarioAction boolean array
      * Each value is true if the corresponding button (down, jump, left, right, etc.) is held down.
      */
@@ -36,10 +35,12 @@ public class Helper {
 
     public static boolean isEnemyNearby(MarioForwardModel model){
         // getEnemiesFloatPos() in MarioForwardModel may be useful here
+        // if enemy is nearby & |y pos| within 2 of mario's, return true
         return false;
     }
 
     public static boolean isBlockNearby(MarioForwardModel model){
+        // if enemy is nearby & |y pos| within 2 of mario's, return true
         return false;
     }
 
@@ -53,25 +54,25 @@ public class Helper {
         ArrayList<boolean[]> possibleActions = new ArrayList<boolean[]>();
         // jump
         if (canJumpHigher(node, true))
-            possibleActions.add(agents.robinBaumgarten.Helper.createAction(false, false, false, true, false));
+            possibleActions.add(agents.chengHuntNagy.Helper.createAction(false, false, false, true, false));
         if (canJumpHigher(node, true))
-            possibleActions.add(agents.robinBaumgarten.Helper.createAction(false, false, false, true, true));
+            possibleActions.add(agents.chengHuntNagy.Helper.createAction(false, false, false, true, false));
 
         // run right
-        possibleActions.add(agents.robinBaumgarten.Helper.createAction(false, true, false, false, true));
+        possibleActions.add(agents.chengHuntNagy.Helper.createAction(false, true, false, false, false));
         if (canJumpHigher(node, true))
-            possibleActions.add(agents.robinBaumgarten.Helper.createAction(false, true, false, true, true));
-        possibleActions.add(agents.robinBaumgarten.Helper.createAction(false, true, false, false, false));
+            possibleActions.add(agents.chengHuntNagy.Helper.createAction(false, true, false, true, false));
+        possibleActions.add(agents.chengHuntNagy.Helper.createAction(false, true, false, false, false));
         if (canJumpHigher(node, true))
-            possibleActions.add(agents.robinBaumgarten.Helper.createAction(false, true, false, true, false));
+            possibleActions.add(agents.chengHuntNagy.Helper.createAction(false, true, false, true, false));
 
         // run left
-        possibleActions.add(agents.robinBaumgarten.Helper.createAction(true, false, false, false, false));
+        possibleActions.add(agents.chengHuntNagy.Helper.createAction(true, false, false, false, false));
         if (canJumpHigher(node, true))
-            possibleActions.add(agents.robinBaumgarten.Helper.createAction(true, false, false, true, false));
-        possibleActions.add(agents.robinBaumgarten.Helper.createAction(true, false, false, false, true));
+            possibleActions.add(agents.chengHuntNagy.Helper.createAction(true, false, false, true, false));
+        possibleActions.add(agents.chengHuntNagy.Helper.createAction(true, false, false, false, false));
         if (canJumpHigher(node, true))
-            possibleActions.add(agents.robinBaumgarten.Helper.createAction(true, false, false, true, true));
+            possibleActions.add(agents.chengHuntNagy.Helper.createAction(true, false, false, true, false));
 
         return possibleActions;
     }
@@ -91,6 +92,7 @@ public class Helper {
         return damage;
     }
 
+    // TODO: rewrite this to use StateMachine stuff :)
     public static String getActionString(boolean[] action) {
         String s = "";
         if (action[MarioActions.RIGHT.getValue()])
