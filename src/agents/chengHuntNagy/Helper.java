@@ -42,14 +42,19 @@ public class Helper {
         float[] marioPos = model.getMarioFloatPos();
         float[] closestEnemy = new float[3];
         float closestX = 50.0f;
-        for(int i = 0; i < enemies.length; i++) {
+
+        //System.out.println("Number of Enemies = " + (enemies.length / 3));
+
+        // Search for closest enemy within Mario's jump range
+        for(int i = 0; i < (enemies.length / 3); i++) {
             float enemyType = enemies[3 * i];
             float enemyX = enemies[3 * i + 1];
             float enemyY = enemies[3 * i + 2];
             // If enemy is to the right of Mario and no more than 2 blocks above Mario
-            if((enemyX > marioPos[1]) && (enemyY <= marioPos[2] + 2) && (enemyX - marioPos[1] < closestX)) {
+            if((enemyX > marioPos[0]) && (enemyY >= marioPos[1] - 2) && (enemyX - marioPos[0] < closestX)) {
                 // Closest enemy found so far?
                 closestEnemy = new float[]{enemyType, enemyX, enemyY};
+                System.out.println("Closest enemy found at: " + enemyX + enemyY);
             }
         }
         // No enemies to kill

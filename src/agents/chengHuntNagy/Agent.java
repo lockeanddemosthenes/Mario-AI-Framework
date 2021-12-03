@@ -20,14 +20,18 @@ public class Agent implements MarioAgent {
     @Override
     public boolean[] getActions(MarioForwardModel model, MarioTimer timer) {
         FSM = FSM.nextState(model);
+        //System.out.println(FSM.getState());
         if(FSM.getState().equals("Kill")){
             // Kill behavior
+            System.out.println("Kill state");
+            action = new boolean[]{false, false, false, false, false};
         }
         else{ // Run state, not using Block state for now
             action = this.pathFinder.optimise(model, timer);
+            //action = new boolean[]{false, true, false, true, false};
         }
 
-        action = new boolean[]{false, true, false, true, true};
+
         return action;
     }
 
