@@ -35,7 +35,7 @@ public class Helper {
         return action;
     }
 
-    // if enemy is nearby & |y pos| within 2 of mario's, return the closest enemy
+    // if enemy is nearby & |y pos| within 2 of mario's, return the position of the closest enemy
     public static float[] enemiesNearby(MarioForwardModel model){
         // getEnemiesFloatPos() in MarioForwardModel may be useful here
         float[] enemies = model.getEnemiesFloatPos();
@@ -61,12 +61,25 @@ public class Helper {
         return false;
     }
 
+    // Returns the action that results in Mario jumping and killing an enemy.
+    public static boolean[] getKillAction(){
+        boolean[] action = new boolean[MarioActions.numberOfActions()];
+
+        // Bring Mario to ~2 blocks to the left of the enemy
+        // Make Mario jump so that he lands on top of the enemy
+        // Maybe we can achieve this in one movement? (i.e. jump + right)
+
+        return action;
+    }
+
+    // Credit: robinBaumgarten agent
     public static boolean canJumpHigher(agents.chengHuntNagy.SearchNode node, boolean checkParent) {
         if (node.parentPos != null && checkParent && canJumpHigher(node.parentPos, false))
             return true;
         return node.sceneSnapshot.mayMarioJump() || node.sceneSnapshot.getMarioCanJumpHigher();
     }
 
+    // Credit: robinBaumgarten agent
     public static ArrayList<boolean[]> createPossibleActions(SearchNode node) {
         ArrayList<boolean[]> possibleActions = new ArrayList<boolean[]>();
         // jump
@@ -94,6 +107,7 @@ public class Helper {
         return possibleActions;
     }
 
+    // Credit: robinBaumgarten agent
     public static int getMarioDamage(MarioForwardModel model, MarioForwardModel prevModel) {
         int damage = 0;
         if (prevModel.getMarioMode() > model.getMarioMode()) {
@@ -110,6 +124,7 @@ public class Helper {
     }
 
     // TODO: rewrite this to use StateMachine stuff :)
+    // Credit: robinBaumgarten agent
     public static String getActionString(boolean[] action) {
         String s = "";
         if (action[MarioActions.RIGHT.getValue()])
@@ -128,6 +143,7 @@ public class Helper {
         return s;
     }
 
+    // Credit: robinBaumgarten agent
     public static float[] estimateMaximumForwardMovement(float currentAccel, boolean[] action, int ticks) {
         float dist = 0;
         float runningSpeed = action[MarioActions.SPEED.getValue()] ? 1.2f : 0.6f;

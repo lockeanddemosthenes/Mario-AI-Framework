@@ -12,9 +12,9 @@ public enum StateMachine {
 
         @Override
         public StateMachine nextState(MarioForwardModel model) {
-            float[] nearbyEnemies = new float[0];
+            float[] nearbyEnemies;
             nearbyEnemies = Helper.enemiesNearby(model);
-            if(nearbyEnemies.length == 0){ 
+            if(nearbyEnemies[1] != 0.0f){
                 float enemyX = nearbyEnemies[1];
                 float enemyY = nearbyEnemies[2];
                 System.out.println("Enemy found at : " + enemyX + ", " + enemyY);
