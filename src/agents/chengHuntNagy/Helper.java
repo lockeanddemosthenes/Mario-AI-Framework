@@ -54,7 +54,8 @@ public class Helper {
             if((enemyX > marioPos[0]) && (enemyY >= marioPos[1] - 2) && (enemyX - marioPos[0] < closestX)) {
                 // Closest enemy found so far?
                 closestEnemy = new float[]{enemyType, enemyX, enemyY};
-                System.out.println("Closest enemy found at: " + enemyX + enemyY);
+                //System.out.println("Closest enemy found at: " + enemyX + enemyY);
+                //System.out.println("Enemy pos - mario pos = " + (enemyX - marioPos[0]));
             }
         }
         // No enemies to kill

@@ -37,7 +37,7 @@ public enum StateMachine {
             if(nearbyEnemies[1] != 0.0f){
                 float enemyX = nearbyEnemies[1];
                 float enemyY = nearbyEnemies[2];
-                System.out.println("Enemy found at : " + enemyX + ", " + enemyY);
+                //System.out.println("Enemy found at : " + enemyX + ", " + enemyY);
                 return this; 
             }
             else if(Helper.isBlockNearby(model)) { return Block; }

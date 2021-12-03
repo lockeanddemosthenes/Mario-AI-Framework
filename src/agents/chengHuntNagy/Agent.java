@@ -23,12 +23,12 @@ public class Agent implements MarioAgent {
         //System.out.println(FSM.getState());
         if(FSM.getState().equals("Kill")){
             // Kill behavior
-            System.out.println("Kill state");
-            action = new boolean[]{false, false, false, false, false};
+            //System.out.println("Kill state");
+            action = Helper.createAction(false, false, false, true, false);
         }
         else{ // Run state, not using Block state for now
             action = this.pathFinder.optimise(model, timer);
-            //action = new boolean[]{false, true, false, true, false};
+            //action = new boolean[]{false, true, false, false, false};
         }
 
 
