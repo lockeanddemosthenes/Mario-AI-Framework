@@ -13,6 +13,8 @@ import engine.helper.MarioActions;
 
 import java.util.ArrayList;
 
+import agents.andySloane.EnemyState;
+
 public class Helper {
 
     public static final int visitedListPenalty = 1500;
@@ -33,10 +35,25 @@ public class Helper {
         return action;
     }
 
-    public static boolean isEnemyNearby(MarioForwardModel model){
+    // if enemy is nearby & |y pos| within 2 of mario's, return the closest enemy
+    public static float[] enemiesNearby(MarioForwardModel model){
         // getEnemiesFloatPos() in MarioForwardModel may be useful here
-        // if enemy is nearby & |y pos| within 2 of mario's, return true
-        return false;
+        float[] enemies = model.getEnemiesFloatPos();
+        float[] marioPos = model.getMarioFloatPos();
+        float[] closestEnemy = new float[3];
+        float closestX = 50.0f;
+        for(int i = 0; i < enemies.length; i++) {
+            float enemyType = enemies[3 * i];
+            float enemyX = enemies[3 * i + 1];
+            float enemyY = enemies[3 * i + 2];
+            // If enemy is to the right of Mario and no more than 2 blocks above Mario
+            if((enemyX > marioPos[1]) && (enemyY <= marioPos[2] + 2) && (enemyX - marioPos[1] < closestX)) {
+                // Closest enemy found so far?
+                closestEnemy = new float[]{enemyType, enemyX, enemyY};
+            }
+        }
+        // No enemies to kill
+        return closestEnemy;
     }
 
     public static boolean isBlockNearby(MarioForwardModel model){
