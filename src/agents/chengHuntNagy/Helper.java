@@ -8,8 +8,11 @@
 package agents.chengHuntNagy;
 
 import engine.core.MarioForwardModel;
+import engine.core.MarioSprite;
 import engine.helper.GameStatus;
 import engine.helper.MarioActions;
+import engine.helper.SpriteType;
+import engine.sprites.*;
 
 import java.util.ArrayList;
 
@@ -18,7 +21,9 @@ import agents.andySloane.EnemyState;
 public class Helper {
 
     public static final int visitedListPenalty = 1500;
-    public static final float maxMarioSpeed = 10.9090909f;
+    public static final float maxMarioSpeed = 3.0f;
+    public static float[] closestEnemyPos;
+    public static SpriteType closestEnemyType;
 
     /**
      * Creates a MarioAction boolean array
@@ -41,7 +46,7 @@ public class Helper {
         float[] enemies = model.getEnemiesFloatPos();
         float[] marioPos = model.getMarioFloatPos();
         float[] closestEnemy = new float[3];
-        float closestX = 50.0f;
+        float closestX = 25.0f;
 
         //System.out.println("Number of Enemies = " + (enemies.length / 3));
 
@@ -51,9 +56,12 @@ public class Helper {
             float enemyX = enemies[3 * i + 1];
             float enemyY = enemies[3 * i + 2];
             // If enemy is to the right of Mario and no more than 2 blocks above Mario
-            if((enemyX > marioPos[0]) && (enemyY >= marioPos[1] - 2) && (enemyX - marioPos[0] < closestX)) {
+            if((enemyX > marioPos[0]) && (enemyY >= marioPos[1] - 2) && ((enemyX - marioPos[0]) < closestX)) {
                 // Closest enemy found so far?
                 closestEnemy = new float[]{enemyType, enemyX, enemyY};
+                closestEnemyPos = closestEnemy;
+                closestX = enemyX;
+                //closestEnemyType = ;
                 //System.out.println("Closest enemy found at: " + enemyX + enemyY);
                 //System.out.println("Enemy pos - mario pos = " + (enemyX - marioPos[0]));
             }
@@ -68,13 +76,17 @@ public class Helper {
     }
 
     // Returns the action that results in Mario jumping and killing an enemy.
-    public static boolean[] getKillAction(){
+    public static boolean[] getKillAction(MarioForwardModel model){
         boolean[] action = new boolean[MarioActions.numberOfActions()];
-
+        float[] marioPos = model.getMarioFloatPos();
         // Bring Mario to ~2 blocks to the left of the enemy
         // Make Mario jump so that he lands on top of the enemy
         // Maybe we can achieve this in one movement? (i.e. jump + right)
-
+        if((closestEnemyPos[0] > marioPos[0]) && (closestEnemyPos[1] >= marioPos[1] - 2)) {
+            if(closestEnemyType == SpriteType.ENEMY_FLOWER) {
+                action = createAction(false, true, false, true, false);
+            }
+        }
         return action;
     }
 

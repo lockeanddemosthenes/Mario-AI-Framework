@@ -25,6 +25,7 @@ public class Agent implements MarioAgent {
             // Kill behavior
             //System.out.println("Kill state");
             action = Helper.createAction(false, false, false, true, false);
+            
         }
         else{ // Run state, not using Block state for now
             action = this.pathFinder.optimise(model, timer);
