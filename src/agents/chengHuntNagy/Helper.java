@@ -61,7 +61,8 @@ public class Helper {
                 closestEnemy = new float[]{enemyType, enemyX, enemyY};
                 closestEnemyPos = closestEnemy;
                 closestX = enemyX;
-                //closestEnemyType = ;
+
+                
                 //System.out.println("Closest enemy found at: " + enemyX + enemyY);
                 //System.out.println("Enemy pos - mario pos = " + (enemyX - marioPos[0]));
             }
@@ -84,6 +85,10 @@ public class Helper {
         // Maybe we can achieve this in one movement? (i.e. jump + right)
         if((closestEnemyPos[0] > marioPos[0]) && (closestEnemyPos[1] >= marioPos[1] - 2)) {
             if(closestEnemyType == SpriteType.ENEMY_FLOWER) {
+                // Jump over piranha plant
+                action = createAction(false, true, false, true, true);
+            }
+            else{
                 action = createAction(false, true, false, true, false);
             }
         }
