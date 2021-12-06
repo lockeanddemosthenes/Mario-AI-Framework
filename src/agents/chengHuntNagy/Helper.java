@@ -23,7 +23,7 @@ public class Helper {
     public static final int visitedListPenalty = 1500;
     public static final float maxMarioSpeed = 3.0f;
     public static float[] closestEnemyPos;
-    public static SpriteType closestEnemyType;
+    public static int closestEnemyType;
 
     /**
      * Creates a MarioAction boolean array
@@ -52,7 +52,7 @@ public class Helper {
 
         // Search for closest enemy within Mario's jump range
         for(int i = 0; i < (enemies.length / 3); i++) {
-            float enemyType = enemies[3 * i];
+            int enemyType = (int)enemies[3 * i];
             float enemyX = enemies[3 * i + 1];
             float enemyY = enemies[3 * i + 2];
             // If enemy is to the right of Mario and no more than 2 blocks above Mario
@@ -61,6 +61,7 @@ public class Helper {
                 closestEnemy = new float[]{enemyType, enemyX, enemyY};
                 closestEnemyPos = closestEnemy;
                 closestX = enemyX;
+                closestEnemyType = enemyType;
 
                 
                 //System.out.println("Closest enemy found at: " + enemyX + enemyY);
@@ -83,8 +84,11 @@ public class Helper {
         // Bring Mario to ~2 blocks to the left of the enemy
         // Make Mario jump so that he lands on top of the enemy
         // Maybe we can achieve this in one movement? (i.e. jump + right)
-        if((closestEnemyPos[0] > marioPos[0]) && (closestEnemyPos[1] >= marioPos[1] - 2)) {
-            if(closestEnemyType == SpriteType.ENEMY_FLOWER) {
+        if(closestEnemyPos[0] < marioPos[0] + 4){
+            System.out.println("Enemy close");
+            System.out.println("Enemy type: " + closestEnemyType);
+            if(closestEnemyType == SpriteType.ENEMY_FLOWER.getValue()) {
+                System.out.println("Enemy flower");
                 // Jump over piranha plant
                 action = createAction(false, true, false, true, true);
             }
@@ -92,6 +96,11 @@ public class Helper {
                 action = createAction(false, true, false, true, false);
             }
         }
+        else{
+            action = createAction(false, true, false, false, false);
+        }
+
+
         return action;
     }
 

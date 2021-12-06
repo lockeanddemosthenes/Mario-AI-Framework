@@ -24,7 +24,7 @@ public class Agent implements MarioAgent {
         if(FSM.getState().equals("Kill")){
             // Kill behavior
             //System.out.println("Kill state");
-            action = Helper.createAction(false, false, false, true, false);
+            action = Helper.getKillAction(model);
             
         }
         else{ // Run state, not using Block state for now
