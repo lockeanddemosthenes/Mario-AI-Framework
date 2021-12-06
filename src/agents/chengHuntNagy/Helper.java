@@ -63,7 +63,13 @@ public class Helper {
                 closestX = enemyX;
                 closestEnemyType = enemyType;
 
-                
+                // Avoid piranha plants/flowers and spiky enemies
+                if((closestEnemyType == SpriteType.ENEMY_FLOWER.getValue()) ||
+                        (closestEnemyType == SpriteType.SPIKY.getValue()) ||
+                        (closestEnemyType == SpriteType.SPIKY_WINGED.getValue())){
+                    return new float[3];
+                }
+
                 //System.out.println("Closest enemy found at: " + enemyX + enemyY);
                 //System.out.println("Enemy pos - mario pos = " + (enemyX - marioPos[0]));
             }
@@ -81,20 +87,10 @@ public class Helper {
     public static boolean[] getKillAction(MarioForwardModel model){
         boolean[] action = new boolean[MarioActions.numberOfActions()];
         float[] marioPos = model.getMarioFloatPos();
-        // Bring Mario to ~2 blocks to the left of the enemy
-        // Make Mario jump so that he lands on top of the enemy
-        // Maybe we can achieve this in one movement? (i.e. jump + right)
-        if(closestEnemyPos[0] < marioPos[0] + 4){
-            System.out.println("Enemy close");
-            System.out.println("Enemy type: " + closestEnemyType);
-            if(closestEnemyType == SpriteType.ENEMY_FLOWER.getValue()) {
-                System.out.println("Enemy flower");
-                // Jump over piranha plant
-                action = createAction(false, true, false, true, true);
-            }
-            else{
-                action = createAction(false, true, false, true, false);
-            }
+
+        // Jump if enemy is close enough
+        if(closestEnemyPos[0] < marioPos[0] + 10){
+            action = createAction(false, true, false, true, false);
         }
         else{
             action = createAction(false, true, false, false, false);
