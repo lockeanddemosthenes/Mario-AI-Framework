@@ -29,6 +29,7 @@ public class Helper {
      * Creates a MarioAction boolean array
      * Each value is true if the corresponding button (down, jump, left, right, etc.) is held down.
      */
+    // Credit: robinBaumgarten agent
     public static boolean[] createAction(boolean left, boolean right, boolean down, boolean jump, boolean speed) {
         boolean[] action = new boolean[5];
 
@@ -78,23 +79,13 @@ public class Helper {
         return closestEnemy;
     }
 
-    public static boolean isBlockNearby(MarioForwardModel model){
-        // if enemy is nearby & |y pos| within 2 of mario's, return true
-        return false;
-    }
-
     // Returns the action that results in Mario jumping and killing an enemy.
     public static boolean[] getKillAction(MarioForwardModel model){
         boolean[] action = new boolean[MarioActions.numberOfActions()];
         float[] marioPos = model.getMarioFloatPos();
 
         // Jump if enemy is close enough
-        if(closestEnemyPos[0] < marioPos[0] + 10){
-            action = createAction(false, true, false, true, false);
-        }
-        else{
-            action = createAction(false, true, false, false, false);
-        }
+        action = createAction(false, true, false, true, false);
 
 
         return action;
@@ -151,7 +142,6 @@ public class Helper {
         return damage;
     }
 
-    // TODO: rewrite this to use StateMachine stuff :)
     // Credit: robinBaumgarten agent
     public static String getActionString(boolean[] action) {
         String s = "";

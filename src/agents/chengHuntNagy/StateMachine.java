@@ -15,12 +15,9 @@ public enum StateMachine {
             float[] nearbyEnemies;
             nearbyEnemies = Helper.enemiesNearby(model);
             if(nearbyEnemies[1] != 0.0f){
-                float enemyX = nearbyEnemies[1];
-                float enemyY = nearbyEnemies[2];
-                // System.out.println("Enemy found at : " + enemyX + ", " + enemyY);
                 return Kill; 
             }
-            else if(Helper.isBlockNearby(model)) { return Block; }
+
             return this;
         }
     },  
@@ -35,33 +32,8 @@ public enum StateMachine {
             float[] nearbyEnemies;
             nearbyEnemies = Helper.enemiesNearby(model);
             if(nearbyEnemies[1] != 0.0f){
-                float enemyX = nearbyEnemies[1];
-                float enemyY = nearbyEnemies[2];
-                //System.out.println("Enemy found at : " + enemyX + ", " + enemyY);
                 return this; 
             }
-            else if(Helper.isBlockNearby(model)) { return Block; }
-
-            return Run;
-        }
-    },
-    Block {
-        @Override
-        public String getState() {
-            return "Block";
-        }
-
-        @Override
-        public StateMachine nextState(MarioForwardModel model) {
-            float[] nearbyEnemies;
-            nearbyEnemies = Helper.enemiesNearby(model);
-            if(nearbyEnemies[1] != 0.0f){
-                float enemyX = nearbyEnemies[1];
-                float enemyY = nearbyEnemies[2];
-                System.out.println("Enemy found at : " + enemyX + ", " + enemyY);
-                return Kill; 
-            }
-            else if(Helper.isBlockNearby(model)) { return this; }
 
             return Run;
         }
