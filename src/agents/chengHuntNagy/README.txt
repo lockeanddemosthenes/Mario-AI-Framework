@@ -19,4 +19,4 @@ INSTRUCTIONS:
     - The file name in the getLevel() function can be changed if desired.
     - Run PlayLevel.java.
 
-VIDEO: link here
+VIDEO: https://youtu.be/oLLySk_d23o
